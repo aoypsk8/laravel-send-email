@@ -45,7 +45,8 @@ Route::group([
 
     'middleware' => [
         'auth.jwt',
-        'role:super-admin|admin'
+        'role:super-admin|admin',
+        'setLocale'
     ],
     'prefix' => 'admin'
 

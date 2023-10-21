@@ -74,6 +74,10 @@ class StoreRequest extends FormRequest
     {
         return [
             'name.required' => 'must input your name',
+
+
+            'email.required'=>__('validation.required'),
+            // 'email.unique'=>__('validation.unique'),
         ];
     }
    

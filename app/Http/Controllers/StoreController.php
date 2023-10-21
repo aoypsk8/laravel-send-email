@@ -18,8 +18,8 @@ class StoreController extends Controller
     public function addStore(StoreRequest $request)
     { 
         
-        $discount = MyHelper::calDiscount(100000);
-        return $discount;
+        // $discount = MyHelper::calDiscount(100000);
+        // return $discount;
 
         $filename = resolve(UploadFileService::class)->uploadFileStoreLogo($request);
 
@@ -38,16 +38,6 @@ class StoreController extends Controller
         $addUser->password = $request->password;
         $addUser->save();
 
-
-        // if ($request->hasFile('profile')) {
-        //     $destination_path = '/images/Store/Profile';
-        //     $imageFile = $request->file('profile');
-        //     // Get just ext
-        //     $extension = $imageFile->getClientOriginalExtension();
-        //     // Filename to store
-        //     $profilename = 'store_user_profile' . '_' . time() . '.' . $extension;
-        //     Storage::disk('public')->putFileAs($destination_path, $imageFile, $profilename);
-        // }
         $profilename = resolve(UploadFileService::class)->uploadFileUserProfile($request);
 
         $addStoreUser = new StoreUser();
@@ -60,7 +50,7 @@ class StoreController extends Controller
         $addUser->attachRole($getRoleStoreAdmin);
 
         return response()->json([
-            'message' => 'success'
+            'message' => __('response.success')
         ]);
     }
 
@@ -97,26 +87,6 @@ class StoreController extends Controller
         $editStore->address = $request->address;
         if (isset($request['logo'])) { 
             resolve(UploadFileService::class)->editUploadFileStore($request,$editStore);
-
-            // $destination_path = '/images/Store/Logo'; // ສ້າງ ຫຼື ອ້າງ folder path
-            // $imageFile = $request->file('logo'); 
-            // // Get just ext
-            // $extension = $imageFile->getClientOriginalExtension();
-            // // Filename to store
-            // $filename = 'store_logo' . '_' . time() . '.' . $extension;
-
-            // Storage::disk('public')->putFileAs($destination_path, $imageFile, $filename);
-
-            // /** ຍ້າຍໄຟລ໌ເກົ່າອອກຈາກ folder */
-            // if (isset($editStore->logo)) {
-            //     $file_path = 'images/Store/Logo/' . $editStore->logo;
-            //     if (Storage::disk('public')->exists($file_path)) {
-            //         Storage::disk('public')->delete($file_path);
-            //     }
-            // }
-
-
-            // $editStore->logo = $filename;
         }
         $editStore->save();
 
