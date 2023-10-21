@@ -20,7 +20,7 @@ class SetLocale
         $locale = $request->header('Accept-Language');
         // if($locale =='thai'){
         //     $locale = 'th';
-        // }
+        // }/////
         if($locale){
             App::setLocale($locale);
         }
