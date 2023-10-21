@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Store;
+use App\Helpers\MyHelper;
 use App\Models\StoreUser;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 use App\Services\UploadFileService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
@@ -16,15 +18,9 @@ class StoreController extends Controller
     public function addStore(StoreRequest $request)
     { 
         
-        // if ($request->hasFile('logo')) {
-        //     $destination_path = '/images/Store/Logo';
-        //     $imageFile = $request->file('logo');
-        //     // Get just ext
-        //     $extension = $imageFile->getClientOriginalExtension();
-        //     // Filename to store
-        //     $filename = 'store_logo' . '_' . time() . '.' . $extension;
-        //     Storage::disk('public')->putFileAs($destination_path, $imageFile, $filename);
-        // }
+        $discount = MyHelper::calDiscount(100000);
+        return $discount;
+
         $filename = resolve(UploadFileService::class)->uploadFileStoreLogo($request);
 
 
